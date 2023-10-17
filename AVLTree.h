@@ -43,18 +43,24 @@ private:
     bool find(const Comparable &c, AVLNode* n, int &depth) const {
         if (n == nullptr) {
             // Reached a dead end. Value not in tree.
-            depth = -1; // dead end, indicates node not found
             return false;
         }
-        if (c < n->value) {
+        if (c < n ->value) {
             // Value is less than current node. Go to node's left child.
             depth ++; // increase depth
-            return find(c, n->leftChild, depth);
+            bool found = find(c, n->leftChild, depth);
+            if (!found) {
+                depth--; // Decrease depth if not found in the left subtree
+            }
+            return found;
         }
-        if (n->value < c) {
+        if (n -> value < c) {
             // Value is greater than current node. Go to node's right child.
             depth ++; // increase depth
-            return find(c, n->rightChild, depth);
+            bool found = find(c, n->rightChild, depth);
+            if (!found) {
+                depth--; // Decrease depth if not found in the right subtree
+            }
         }
         // If code reaches here, c == n->value. Node found!
         return true;
@@ -228,10 +234,14 @@ public:
         return (root == nullptr);
     }
 
-    bool find(const Comparable &c) const {
+    bool find(const Comparable &c, int &depth) const {
         // calls private helper function
-        int depth = 0;
-        return find(c, root, depth);
+        int resultDepth = 0;
+        bool found = find(c, root, resultDepth);
+        if (found) {
+            depth = resultDepth; // Assign the captured depth to the depth variable
+        }
+        return found;
     }
 
     bool add(const Comparable &c) {
