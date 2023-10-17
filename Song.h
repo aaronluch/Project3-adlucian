@@ -158,6 +158,29 @@ public:
         os << "---------------";
         return os;
     }
+
+    // Overload methods for insertion (Project 3)
+    bool operator<(const Song& other) const{
+        return this->rowid < other.rowid;
+    }
+
+    bool operator>(const Song& other) const{
+        return this->rowid > other.rowid;
+    }
+
+    bool operator<=(const Song& other) const{
+        return this->rowid <= other.rowid;
+    }
+
+    bool operator>=(const Song& other) const{
+        return this->rowid >= other.rowid;
+    }
+
+    bool operator==(const Song& other) const{
+        return this->rowid == other.rowid;
+    }
+
+
 };
 
 /**
@@ -210,7 +233,7 @@ string parseCSVRow(ifstream& inFile){
 void getDataFromFile(vector<Song> & songs){
     ifstream inFile;
 
-    inFile.open("../merged-songs.csv");
+    inFile.open("../data/merged-songs.csv");
 
     // Reads Header but prints nothing (intentionally)
     std::string header = "";
