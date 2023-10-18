@@ -52,7 +52,12 @@ ordered integers for each tree? Why?**<br />
   The repetition of "Row ID" 1 with a high depth shows that the tree restructures over time, 
   a characteristic of the splay tree's optimization for frequently accessed nodes.
     
-* **Tree Graphs:**<br /><br />
+* **Tree Graphs:**<br />
+![Song Depths: AVL Depths](graphs/Song-Depths-AVL-Depth.png)
+![Song Depths: BST Depths](graphs/Song-Depths-BST-Depth.png)
+![Song Depths: Splay Tree Depths](graphs/Song-Depths-Splay-Depth.png)
+![Additional Splay Tree Depths](graphs/Another-Splay-Tree-Depth.png)
+<br />
 
 * **Compare and contrast the graphs and explain the differences based on what you know about the structure and behavior 
 of the trees. Justify the time complexity of searching the trees based on the results.**<br />
