@@ -71,7 +71,7 @@ int main(){
         cout << "Found 0 in the BST with depth " << depth0 << endl;
     }
     else{
-        cout << "0 not found in the BST" << endl;
+        cout << "0 not found in the BST, reached depth " << depth0 << endl; // print the depth even if not found
     }
 
     int depth101 = 0;
@@ -80,7 +80,7 @@ int main(){
         cout << "Found 101 in the BST with depth " << depth101 << endl;
     }
     else{
-        cout << "101 not found in the BST" << endl;
+        cout << "101 not found in the BST, reached depth " << depth101 << endl; // print the depth even if not found
     }
 
     int depth102 = 0;
@@ -89,7 +89,7 @@ int main(){
         cout << "Found 102 in the BST with depth " << depth102 << endl;
     }
     else{
-        cout << "102 not found in the BST" << endl;
+        cout << "102 not found in the BST, reached depth " << depth102 << endl; // print the depth even if not found
     }
 
     // Get rid of trees
@@ -142,7 +142,7 @@ int main(){
     outFile2 << "Value,BST Depth,AVL Depth,Splay Depth" << endl; // Add labels
 
     // Loop to find each integer in order and record depths
-    for (int j = 1; j <= 100; j ++) {
+    for (int j = 1; j <= 100; j ++){
         int depthBST = 0;
         int depthAVL = 0;
         int depthSplay = 0;
@@ -171,12 +171,21 @@ int main(){
 
     // Loop to insert all songs into each tree
     for (const Song& song : songs){
-        songBST.add(song);
-        songAVL.add(song);
-        songSPLAYTREE.add(song);
+        if (!songBST.add(song)){
+            cout << "Could not add " << song << " to the BST tree" << endl;
+        }
+
+        if (!songAVL.add(song)){
+            cout << "Could not add " << song << " to the AVL tree" << endl;
+        }
+
+        if (!songSPLAYTREE.add(song)){
+            cout << "Could not add " << song << " to the Splay tree" << endl;
+        }
     }
+
     // Check sizes of trees to make sure data was stored correctly
-    if(songBST.getSize() && songAVL.getSize() && songSPLAYTREE.getSize() == 1030) {
+    if(songBST.getSize() && songAVL.getSize() && songSPLAYTREE.getSize() == 1030){
         cout << "Checking Song BST size: " << songBST.getSize() << endl;
         cout << "Checking Song AVL size: " << songAVL.getSize() << endl;
         cout << "Checking Song Splay Tree size: " << songSPLAYTREE.getSize() << endl;
@@ -187,10 +196,10 @@ int main(){
 
     // Open a file for recording depths
     ofstream outFile3("../data/songs-depths-output.csv");
-    outFile3 << "Value,BST Depth,AVL Depth,Splay Depth" << endl; // Add labels
+    outFile3 << "Row ID,BST Depth,AVL Depth,Splay Depth" << endl; // Add labels
 
     // Loop to find each integer in order and record depths
-    for (int l = 1; l <= songs.size(); l ++) {
+    for (int l = 0; l < songs.size(); l ++){
         int depthBST = 0;
         int depthAVL = 0;
         int depthSplay = 0;
@@ -201,7 +210,7 @@ int main(){
         songSPLAYTREE.find(songs[l], depthSplay);
 
         // Record the depths to the output file
-        outFile3 << l << "," << depthBST << "," << depthAVL << "," << depthSplay << endl;
+        outFile3 << songs[l].getRowId() << "," << depthBST << "," << depthAVL << "," << depthSplay << endl;
     }
 
     // Close outfile
@@ -215,25 +224,24 @@ int main(){
     // Create another Splay Tree with Song data type
     SplayTree<Song> anotherSongSplayTree;
     // Add 1000+ objects to this Splay Tree
-    for (const Song& song : songs) {
-    anotherSongSplayTree.add(song);
+    for (const Song& song : songs){
+        if (!anotherSongSplayTree.add(song)){
+            cout << "Could not add " << song << " to the Splay Tree tree" << endl;
+        }
     }
 
     // Open a file for recording depths
     ofstream outFile4("../data/another-splayTree-depths.csv");
-    outFile4 << "Value,Splay Depth" << endl; // Add labels
+    outFile4 << "Row ID,Splay Depth" << endl; // Add labels
 
     // Find each object five times in a row
-    for (int p = 1; p <= songs.size(); p++){
-        // Establish Depth
-        int depthSplay = 0;
+    for (int p = 0; p < songs.size(); p++){
         // Loop to find each object five times before the next
-        int i = 0;
-        while(i != 5){
+        for (int i = 1; i <= 5; i++){
+            int depthSplay = 0;
             anotherSongSplayTree.find(songs[p], depthSplay);
             // Record the depths to the output file
-            outFile4 << i+1 << "," << depthSplay << endl;
-            i++;
+            outFile4 << songs[p].getRowId() << "," << depthSplay << endl;
         }
     }
     // Close outfile

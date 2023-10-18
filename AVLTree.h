@@ -40,30 +40,25 @@ private:
     }
 
     // Helper recursive function to find a value in the tree.
-    bool find(const Comparable &c, AVLNode* n, int &depth) const {
-        if (n == nullptr) {
-            // Reached a dead end. Value not in tree.
+    bool findHelper(const Comparable &c, AVLNode* n, int &depth) const {
+        if (n == nullptr){
+            // The value is not in the tree, but we've reached a new depth.
             return false;
         }
-        if (c < n ->value) {
-            // Value is less than current node. Go to node's left child.
-            depth ++; // increase depth
-            bool found = find(c, n->leftChild, depth);
-            if (!found) {
-                depth--; // Decrease depth if not found in the left subtree
-            }
-            return found;
+        if (c < n->value){
+            // Go left if the value is smaller.
+            depth++;
+            return findHelper(c, n->leftChild, depth);
         }
-        if (n -> value < c) {
-            // Value is greater than current node. Go to node's right child.
-            depth ++; // increase depth
-            bool found = find(c, n->rightChild, depth);
-            if (!found) {
-                depth--; // Decrease depth if not found in the right subtree
-            }
+        else if (c > n->value){
+            // Go right if the value is larger.
+            depth++;
+            return findHelper(c, n->rightChild, depth);
         }
-        // If code reaches here, c == n->value. Node found!
-        return true;
+        else{
+            // We've found the value, and depth is already set correctly.
+            return true;
+        }
     }
 
     int getNodeHeight(AVLNode* &n) const {
@@ -236,12 +231,8 @@ public:
 
     bool find(const Comparable &c, int &depth) const {
         // calls private helper function
-        int resultDepth = 0;
-        bool found = find(c, root, resultDepth);
-        if (found) {
-            depth = resultDepth; // Assign the captured depth to the depth variable
-        }
-        return found;
+        depth = 0;
+        return findHelper(c, root, depth);
     }
 
     bool add(const Comparable &c) {
@@ -264,6 +255,7 @@ public:
         size = 0;
         root = copyNode(rhs.root);
     }
+
 };
 
 
