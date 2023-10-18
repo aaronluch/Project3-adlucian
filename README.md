@@ -53,9 +53,13 @@ ordered integers for each tree? Why?**<br />
   a characteristic of the splay tree's optimization for frequently accessed nodes.
     
 * **Tree Graphs:**<br />
+Song Depths: AVL Depths
 ![Song Depths: AVL Depths](graphs/Song-Depths-AVL-Depth.png)
+Song Depths: BST Depths
 ![Song Depths: BST Depths](graphs/Song-Depths-BST-Depth.png)
+Song Depths: Splay Tree Depths
 ![Song Depths: Splay Tree Depths](graphs/Song-Depths-Splay-Depth.png)
+Additional Splay Tree Depths (5000+ values)
 ![Additional Splay Tree Depths](graphs/Another-Splay-Tree-Depth.png)
 <br />
 
