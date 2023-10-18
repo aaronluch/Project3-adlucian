@@ -40,20 +40,18 @@ private:
     }
 
     // Helper recursive function to find a value in the tree.
-    bool find(const Comparable &c, AVLNode* n, int &depth) const {
+    bool find(const Comparable &c, AVLNode* n, int &depth) const{
         if (n == nullptr){
             // The value is not in the tree, but we've reached a new depth.
             return false;
         }
         if (c < n->value){
             // Go left if the value is smaller.
-            depth++;
-            return find(c, n->leftChild, depth);
+            return find(c, n->leftChild, ++depth);
         }
         else if (c > n->value){
             // Go right if the value is larger.
-            depth++;
-            return find(c, n->rightChild, depth);
+            return find(c, n->rightChild, ++depth);
         }
         else{
             // We've found the value, and depth is already set correctly.

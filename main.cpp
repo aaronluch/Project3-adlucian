@@ -49,7 +49,7 @@ int main(){
     outFile << "Index,BST Depth,AVL Depth,Splay Depth" << endl; // Add labels
 
     // Loop to find each integer in order
-    for (int k = 1; k <= 100; k++){
+    for (int k = 0; k < 100; ++k){
         int depthBST = 0;
         int depthAVL = 0;
         int depthSplay = 0;
@@ -60,7 +60,7 @@ int main(){
         splayTree1.find(k, depthSplay);
 
         // Record the depths to the output file
-        outFile << k-1 << "," << depthBST-1 << "," << depthAVL << "," << depthSplay << endl;
+        outFile << k << "," << depthBST << "," << depthAVL << "," << depthSplay << endl;
     }
     outFile.close(); // Close current outFile
 
