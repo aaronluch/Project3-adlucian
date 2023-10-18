@@ -45,8 +45,8 @@ int main(){
 
     // Open file for depths to record to
     ofstream outFile;
-    outFile.open("../data/depths-output-1.csv");
-    outFile << "Value,BST Depth,AVL Depth,Splay Depth" << endl; // Add labels
+    outFile.open("../data/initial-depths-output.csv");
+    outFile << "Index,BST Depth,AVL Depth,Splay Depth" << endl; // Add labels
 
     // Loop to find each integer in order
     for (int k = 1; k <= 100; k++){
@@ -60,11 +60,12 @@ int main(){
         splayTree1.find(k, depthSplay);
 
         // Record the depths to the output file
-        outFile << k << "," << depthBST << "," << depthAVL << "," << depthSplay << endl;
+        outFile << k-1 << "," << depthBST-1 << "," << depthAVL << "," << depthSplay << endl;
     }
     outFile.close(); // Close current outFile
 
     // Check understanding with BST print statements
+    cout << "\nTesting Understanding of BST / Tree Functionality:" << endl;
     int depth0 = 0;
     bool found0 = bst1.find(0, depth0);
     if (found0){
@@ -132,14 +133,15 @@ int main(){
     }
 
     // printing first 10 values of Shuffled Numbers below
-    cout << "First Ten Values from Shuffled Numbers: " << endl;
+    cout << "--------\nFirst Ten Values from Shuffled Numbers: " << endl;
     for(int firstTen = 0; firstTen <= 10; firstTen++){
         cout << "Value [" << firstTen+1 << "]: " << shuffledNumbers[firstTen] << endl;
     }
+    cout << "--------" << endl;
 
     // Open a file for recording depths
-    ofstream outFile2("../data/depths-output-2.csv");
-    outFile2 << "Value,BST Depth,AVL Depth,Splay Depth" << endl; // Add labels
+    ofstream outFile2("../data/shuffled-depths-output.csv");
+    outFile2 << "Index,BST Depth,AVL Depth,Splay Depth" << endl; // Add labels
 
     // Loop to find each integer in order and record depths
     for (int j = 1; j <= 100; j ++){
@@ -153,7 +155,7 @@ int main(){
         splayTree2.find(j, depthSplay);
 
         // Record the depths to the output file
-        outFile2 << j << "," << depthBST << "," << depthAVL << "," << depthSplay << endl;
+        outFile2 << j-1 << "," << depthBST << "," << depthAVL << "," << depthSplay << endl;
     }
 
     // Close the output file
@@ -185,18 +187,20 @@ int main(){
     }
 
     // Check sizes of trees to make sure data was stored correctly
-    if(songBST.getSize() && songAVL.getSize() && songSPLAYTREE.getSize() == 1030){
-        cout << "Checking Song BST size: " << songBST.getSize() << endl;
-        cout << "Checking Song AVL size: " << songAVL.getSize() << endl;
-        cout << "Checking Song Splay Tree size: " << songSPLAYTREE.getSize() << endl;
+    cout << "Check sizes of trees to make sure data was stored correctly:" << endl;
+    if(songBST.getSize() && songAVL.getSize() && songSPLAYTREE.getSize() == songs.size()){
+        cout << "Song BST size: " << songBST.getSize() << endl;
+        cout << "Song AVL size: " << songAVL.getSize() << endl;
+        cout << "Song Splay Tree size: " << songSPLAYTREE.getSize() << endl;
     }
     else{
         cout << "Wrong size recorded -- Problem occurred..." << endl;
     }
+    cout << "Song Vector Total size: " << songs.size() << endl;
 
     // Open a file for recording depths
     ofstream outFile3("../data/songs-depths-output.csv");
-    outFile3 << "Row ID,BST Depth,AVL Depth,Splay Depth" << endl; // Add labels
+    outFile3 << "Row ID [Index],BST Depth,AVL Depth,Splay Depth" << endl; // Add labels
 
     // Loop to find each integer in order and record depths
     for (int l = 0; l < songs.size(); l ++){
@@ -210,7 +214,7 @@ int main(){
         songSPLAYTREE.find(songs[l], depthSplay);
 
         // Record the depths to the output file
-        outFile3 << songs[l].getRowId() << "," << depthBST << "," << depthAVL << "," << depthSplay << endl;
+        outFile3 << songs[l].getRowId()-1 << "," << depthBST << "," << depthAVL << "," << depthSplay << endl;
     }
 
     // Close outfile
@@ -232,7 +236,7 @@ int main(){
 
     // Open a file for recording depths
     ofstream outFile4("../data/another-splayTree-depths.csv");
-    outFile4 << "Row ID,Splay Depth" << endl; // Add labels
+    outFile4 << "Row ID [Index],Splay Depth" << endl; // Add labels
 
     // Find each object five times in a row
     for (int p = 0; p < songs.size(); p++){
@@ -241,7 +245,7 @@ int main(){
             int depthSplay = 0;
             anotherSongSplayTree.find(songs[p], depthSplay);
             // Record the depths to the output file
-            outFile4 << songs[p].getRowId() << "," << depthSplay << endl;
+            outFile4 << songs[p].getRowId()-1 << "," << depthSplay << endl;
         }
     }
     // Close outfile

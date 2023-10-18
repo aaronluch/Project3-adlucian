@@ -132,7 +132,7 @@ private:
     }
 
     // Helper recursive function to find a value in the tree.
-    bool findHelper(const Comparable &c, SplayNode* n, int &depth) const {
+    bool find(const Comparable &c, SplayNode* n, int &depth) const {
         if (n == nullptr) {
             // The value is not in the tree, but we've reached a new depth.
             return false;
@@ -140,11 +140,11 @@ private:
         depth++;
         if (c < n->value){
             // Go left if the value is smaller.
-            return findHelper(c, n->leftChild, depth);
+            return find(c, n->leftChild, depth);
         }
         else if (c > n->value){
             // Go right if the value is larger.
-            return findHelper(c, n->rightChild, depth);
+            return find(c, n->rightChild, depth);
         }
         else{
             // We've found the value, and depth is already set correctly.
@@ -246,7 +246,7 @@ public:
     bool find(const Comparable &c, int &depth) const {
         // calls private helper function
         depth = -1;
-        return findHelper(c, root, depth);
+        return find(c, root, depth);
     }
 
     bool add(const Comparable &c) {
