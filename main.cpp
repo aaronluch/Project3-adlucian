@@ -78,19 +78,19 @@ int main(){
     int depth101 = 0;
     bool found101 = bst1.find(101, depth101);
     if (found101){
-        cout << "Found 101 in the BST with depth " << depth101 << endl;
+        cout << "Found 101 in the BST with depth " << depth101-1 << endl;
     }
     else{
-        cout << "101 not found in the BST, reached depth " << depth101 << endl; // print the depth even if not found
+        cout << "101 not found in the BST, reached depth " << depth101-1 << endl; // print the depth even if not found
     }
 
     int depth102 = 0;
     bool found102 = bst1.find(102, depth102);
     if (found102){
-        cout << "Found 102 in the BST with depth " << depth102 << endl;
+        cout << "Found 102 in the BST with depth " << depth102-1 << endl;
     }
     else{
-        cout << "102 not found in the BST, reached depth " << depth102 << endl; // print the depth even if not found
+        cout << "102 not found in the BST, reached depth " << depth102-1 << endl; // print the depth even if not found
     }
 
     // Get rid of trees
@@ -144,7 +144,7 @@ int main(){
     outFile2 << "Index,BST Depth,AVL Depth,Splay Depth" << endl; // Add labels
 
     // Loop to find each integer in order and record depths
-    for (int j = 1; j <= 100; j ++){
+    for (int j = 0; j < 100; ++j){
         int depthBST = 0;
         int depthAVL = 0;
         int depthSplay = 0;
@@ -155,7 +155,7 @@ int main(){
         splayTree2.find(j, depthSplay);
 
         // Record the depths to the output file
-        outFile2 << j-1 << "," << depthBST << "," << depthAVL << "," << depthSplay << endl;
+        outFile2 << j << "," << depthBST << "," << depthAVL << "," << depthSplay << endl;
     }
 
     // Close the output file
@@ -203,7 +203,7 @@ int main(){
     outFile3 << "Row ID [Index],BST Depth,AVL Depth,Splay Depth" << endl; // Add labels
 
     // Loop to find each integer in order and record depths
-    for (int l = 0; l < songs.size(); l ++){
+    for (int l = 0; l < songs.size(); ++l){
         int depthBST = 0;
         int depthAVL = 0;
         int depthSplay = 0;
@@ -214,7 +214,7 @@ int main(){
         songSPLAYTREE.find(songs[l], depthSplay);
 
         // Record the depths to the output file
-        outFile3 << songs[l].getRowId()-1 << "," << depthBST << "," << depthAVL << "," << depthSplay << endl;
+        outFile3 << songs[l].getRowId() << "," << depthBST << "," << depthAVL << "," << depthSplay << endl;
     }
 
     // Close outfile
@@ -245,7 +245,7 @@ int main(){
             int depthSplay = 0;
             anotherSongSplayTree.find(songs[p], depthSplay);
             // Record the depths to the output file
-            outFile4 << songs[p].getRowId()-1 << "," << depthSplay << endl;
+            outFile4 << songs[p].getRowId() << "," << depthSplay << endl;
         }
     }
     // Close outfile
