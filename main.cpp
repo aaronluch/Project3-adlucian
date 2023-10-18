@@ -105,7 +105,6 @@ int main(){
     }
 
     // Shuffle the vector
-    // ref: https://www.geeksforgeeks.org/stdmt19937-class-in-cpp/
     std::random_device rd;
     std::mt19937 randomizer(rd());
     std::shuffle(shuffledNumbers.begin(), shuffledNumbers.end(), randomizer);
