@@ -1,5 +1,4 @@
-# CS2240 Project 3 - Aaron Luciano
-**Trees and Depths**<br />
+# CS2240 Project 3 - Trees and Depths - Aaron Luciano
 *10/16/2023*
 
 * **Information about your data set**<br />
